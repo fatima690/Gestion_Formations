@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="partner_category_participant" model="res.partner.category">
+        <field name="name">Participant</field>
+    </record>
+
+    <record id="partner_category_formateur" model="res.partner.category">
+        <field name="name">Formateur</field>
+    </record>
+</odoo>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="partner_formateur_demo" model="res.partner">
+        <field name="name">Dr. Ahmed Formateur</field>
+        <field name="email">a.formateur@example.com</field>
+        <field name="category_id" eval="[(4, ref('Gestion_Form.partner_category_formateur'))]"/>
+    </record>
+
+    <record id="partner_participant_1" model="res.partner">
+        <field name="name">Sara Participant</field>
+        <field name="email">sara.participant@example.com</field>
+        <field name="category_id" eval="[(4, ref('Gestion_Form.partner_category_participant'))]"/>
+    </record>
+
+    <record id="partner_participant_2" model="res.partner">
+        <field name="name">Youssef Participant</field>
+        <field name="email">youssef.participant@example.com</field>
+        <field name="category_id" eval="[(4, ref('Gestion_Form.partner_category_participant'))]"/>
+    </record>
+
+    <record id="formation_python" model="gestion.formation">
+        <field name="name">Python pour Data</field>
+        <field name="responsable">Département Informatique</field>
+        <field name="ville">casablanca</field>
+        <field name="date_debut">2026-01-10</field>
+        <field name="date_fin">2026-01-20</field>
+        <field name="duree">10</field>
+        <field name="statut">planifie</field>
+        <field name="nombre_places">25</field>
+        <field name="prix">12000</field>
+        <field name="description">Formation orientée data: Numpy, Pandas, Visualisation.</field>
+    </record>
+
+    <record id="formation_erp" model="gestion.formation">
+        <field name="name">ERP Odoo - Initiation</field>
+        <field name="responsable">Département Management</field>
+        <field name="ville">rabat</field>
+        <field name="date_debut">2026-02-01</field>
+        <field name="date_fin">2026-02-05</field>
+        <field name="duree">5</field>
+        <field name="statut">planifie</field>
+        <field name="nombre_places">20</field>
+        <field name="prix">8000</field>
+        <field name="description">Introduction à Odoo, modules, vues, sécurité, workflow.</field>
+    </record>
+
+    <record id="session_python_1" model="gestion.formation.session">
+        <field name="name">Session Janvier</field>
+        <field name="formation_id" ref="formation_python"/>
+        <field name="date_debut">2026-01-10</field>
+        <field name="date_fin">2026-01-20</field>
+        <field name="capacite">25</field>
+        <field name="formateur_id" ref="partner_formateur_demo"/>
+        <field name="state">confirmed</field>
+    </record>
+
+    <record id="session_erp_1" model="gestion.formation.session">
+        <field name="name">Session Février</field>
+        <field name="formation_id" ref="formation_erp"/>
+        <field name="date_debut">2026-02-01</field>
+        <field name="date_fin">2026-02-05</field>
+        <field name="capacite">20</field>
+        <field name="formateur_id" ref="partner_formateur_demo"/>
+        <field name="state">draft</field>
+    </record>
+
+    <record id="inscription_1" model="gestion.formation.inscription">
+        <field name="session_id" ref="session_python_1"/>
+        <field name="participant_id" ref="partner_participant_1"/>
+        <field name="date_inscription">2026-01-05</field>
+        <field name="state">confirmed</field>
+    </record>
+
+    <record id="inscription_2" model="gestion.formation.inscription">
+        <field name="session_id" ref="session_python_1"/>
+        <field name="participant_id" ref="partner_participant_2"/>
+        <field name="date_inscription">2026-01-06</field>
+        <field name="state">draft</field>
+    </record>
+</odoo>

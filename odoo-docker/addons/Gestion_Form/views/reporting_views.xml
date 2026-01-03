@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_inscription_pivot" model="ir.ui.view">
+        <field name="name">gestion.formation.inscription.pivot</field>
+        <field name="model">gestion.formation.inscription</field>
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="formation_id" type="row"/>
+                <field name="session_id" type="row"/>
+                <field name="state" type="col"/>
+                <field name="qty" type="measure" operator="sum" string="Inscriptions"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_inscription_graph" model="ir.ui.view">
+        <field name="name">gestion.formation.inscription.graph</field>
+        <field name="model">gestion.formation.inscription</field>
+        <field name="arch" type="xml">
+            <graph string="Inscriptions" type="bar">
+                <field name="formation_id" type="row"/>
+                <field name="qty" type="measure" operator="sum" string="Inscriptions"/>
+                <field name="state" type="col"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_inscription_reporting" model="ir.actions.act_window">
+        <field name="name">Reporting Inscriptions</field>
+        <field name="res_model">gestion.formation.inscription</field>
+        <field name="view_mode">pivot,graph,tree</field>
+    </record>
+
+    <menuitem id="menu_formations_reporting" 
+              name="Reporting" 
+              parent="menu_gestion_formations" 
+              sequence="60"/>
+
+    <menuitem id="menu_formations_reporting_inscriptions" 
+              name="Inscriptions" 
+              parent="menu_formations_reporting" 
+              sequence="10"
+              action="action_inscription_reporting"/>
+</odoo>

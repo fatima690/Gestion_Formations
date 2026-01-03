@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Action pour ouvrir la liste -->
+    <record id="action_formations" model="ir.actions.act_window">
+        <field name="name">Formations</field>
+        <field name="res_model">gestion.formation</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créez votre première formation
+            </p>
+        </field>
+    </record>
+    
+    <!-- Menu principal -->
+    <menuitem id="menu_gestion_formations" name="Formations" sequence="10"/>
+    
+    <!-- Sous-menu -->
+    <menuitem id="menu_formations_liste" 
+              name="Liste des Formations" 
+              parent="menu_gestion_formations" 
+              sequence="20"
+              action="action_formations"/>
+    
+    <!-- Vue liste -->
+    <record id="view_formation_tree" model="ir.ui.view">
+        <field name="name">gestion.formation.tree</field>
+        <field name="model">gestion.formation</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="responsable"/>
+                <field name="ville"/>
+                <field name="date_debut"/>
+                <field name="date_fin"/>
+                <field name="statut"/>
+                <field name="nombre_places"/>
+                <field name="prix" string="Prix (DH)"/>
+            </tree>
+        </field>
+    </record>
+    
+    <!-- Vue formulaire -->
+    <record id="view_formation_form" model="ir.ui.view">
+        <field name="name">gestion.formation.form</field>
+        <field name="model">gestion.formation</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="responsable"/>
+                        <field name="ville"/>
+                        <field name="date_debut"/>
+                        <field name="date_fin"/>
+                        <field name="duree"/>
+                    </group>
+                    <group>
+                        <field name="statut"/>
+                        <field name="nombre_places"/>
+                        <field name="prix" string="Prix (DH)"/>
+                    </group>
+                    <group>
+                        <field name="description" widget="html"/>
+                    </group>
+                    <notebook>
+                        <page string="Sessions">
+                            <field name="session_ids" context="{'default_formation_id': active_id}">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="date_debut"/>
+                                    <field name="date_fin"/>
+                                    <field name="formateur_id"/>
+                                    <field name="capacite"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
